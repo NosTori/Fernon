@@ -9,11 +9,21 @@
 FERNON_NAMESPACE_BEGIN
 
 #define GF_3904_NostaleClientX_LOGIN_IP_ADDRESS_START_ADDRESS  0x000b36b4
-#define GF_3904_NostaleClientX_LOGIN_IP_ADDRESS_LENGTH 15
+#define GF_3904_NostaleClientX_LOGIN_IP_ADDRESS_LENGTH         15
+#define GF_3904_NostaleClientX_LOGIN_IP_ADDRESS_VALUE          { 0x37, 0x39, 0x2E, 0x31, 0x31, 0x30, 0x2E, 0x38, 0x34, 0x2E, 0x37, 0x35, 0x00, 0x00, 0x00 }
+
+#define GF_3904_NostaleClient_LOGIN_IP_ADDRESS_START_ADDRESS    0x000a5340
+#define GF_3904_NostaleClient_LOGIN_IP_ADDRESS_LENGTH           15
+#define GF_3904_NostaleClient_LOGIN_IP_ADDRESS_VALUE            { 0x37, 0x39, 0x2E, 0x31, 0x31, 0x30, 0x2E, 0x38, 0x34, 0x2E, 0x37, 0x35, 0x00, 0x00, 0x00 }
 
 #ifdef GF_3904
     #define NostaleClientX_LOGIN_IP_ADDRESS_START_ADDRESS   GF_3904_NostaleClientX_LOGIN_IP_ADDRESS_START_ADDRESS
     #define NostaleClientX_LOGIN_IP_ADDRESS_LENGTH          GF_3904_NostaleClientX_LOGIN_IP_ADDRESS_LENGTH
+    #define NostaleClientX_LOGIN_IP_ADDRESS_VALUE           GF_3904_NostaleClientX_LOGIN_IP_ADDRESS_VALUE
+
+    #define NostaleClient_LOGIN_IP_ADDRESS_START_ADDRESS   GF_3904_NostaleClient_LOGIN_IP_ADDRESS_START_ADDRESS
+    #define NostaleClient_LOGIN_IP_ADDRESS_LENGTH          GF_3904_NostaleClient_LOGIN_IP_ADDRESS_LENGTH
+    #define NostaleClient_LOGIN_IP_ADDRESS_VALUE           GF_3904_NostaleClient_LOGIN_IP_ADDRESS_VALUE
 #endif
 
 ////////////////////////////////////////////////////////////////////////////////////////////
