@@ -52,7 +52,7 @@
     CUTILE_C_API cutile_ini_entry_value_result cutile_get_ini_entry_value(const char* section_name, const char* entry_name, const cutile_parse_ini_result* parsed_data);
 
     // Fast ini api.
-    CUTILE_C_API b8 cutile_get_ini_field(u8* ini_data,
+    CUTILE_C_API b8 cutile_get_ini_field(const u8* ini_data,
                                          u64 ini_size,
                                          const char* section_name, // NULL if no section (global section).
                                          const char* entry_name,
@@ -166,7 +166,9 @@
             }
     
             // Section name or entry name or entry value.
-            else if ((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z'))
+            else if ((ch >= 'a' && ch <= 'z') ||
+                     (ch >= 'A' && ch <= 'Z') ||
+                     (ch >= '0' && ch <= '9'))
             {
                 tok.kind = cutile_ini_parser_token_kind_name_or_value;
                 tok.start = state->data + state->index;
@@ -177,8 +179,10 @@
                     ch = state->data[state->index];
     
                     // Allowed characters:
-                    if ((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z') ||
-                        (ch == '_'))
+                    if ((ch >= 'a' && ch <= 'z') ||
+                        (ch >= 'A' && ch <= 'Z') ||
+                        (ch >= '0' && ch <= '9') ||
+                        (ch == '_') || (ch == '.'))
                     {
                         ++tok.end;
                         ++state->index;
@@ -186,25 +190,6 @@
     
                     else break;
                 }
-            }
-    
-            // Number value.
-            else if (ch >= '0' && ch <= '9')
-            {
-                tok.kind = cutile_ini_parser_token_kind_name_or_value;
-                tok.start = state->data + state->index;
-                tok.end = tok.start;
-                ++state->index;
-                while (state->index < state->data_size)
-                {
-                    ch = state->data[state->index];
-                    if (ch >= '0' && ch <= '9')
-                    {
-                        ++tok.end;
-                        ++state->index;
-                    }
-                    else break;
-                };
             }
     
             // Null terminator (C-strings)
@@ -444,7 +429,7 @@
             cutile_destroy_cutile_ini_section_array(&parsed_data->sections);
         }
     
-        b8 cutile_get_ini_field(u8* ini_data,
+        b8 cutile_get_ini_field(const u8* ini_data,
                                 u64 ini_size,
                                 const char* section_name, // NULL if no section (global section).
                                 const char* entry_name,
@@ -488,7 +473,7 @@
                 }
             }
     
-            u32 entry_name_length = 0; while(entry_name[entry_name_length]) entry_name_length;
+            u32 entry_name_length = 0; while(entry_name[entry_name_length]) entry_name_length++;
             while (b8_true)
             {
                 tok = cutile_get_next_ini_parser_token(&state);

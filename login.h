@@ -3,8 +3,8 @@
 #pragma once
 
 #include "fernon.h"
-#include "cutile-0.1.6/str_format.h"
-#include "cutile-0.1.6/array.h"
+#include "cutile-0.1.8/str_format.h"
+#include "cutile-0.1.8/array.h"
 
 FERNON_NAMESPACE_BEGIN
 
